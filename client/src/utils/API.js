@@ -18,10 +18,7 @@ export default {
     return axios.post("/api/savedBooks", bookData);
   },
   searchBook: function(titleSearch, authorSearch) {
-    console.log("titleSearch: ");
-    console.log(titleSearch);
-    console.log(" authorSearch: ");
-    console.log(authorSearch);
+
     return axios.get(
       "https://www.googleapis.com/books/v1/volumes?q=" +
         titleSearch +

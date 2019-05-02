@@ -41,8 +41,8 @@ class Books extends Component {
       .catch(err => console.log(err));
   };
 
-  deleteBook = id => {
-    API.deleteBook(id)
+  deleteBook = bookID => {
+    API.deleteBook(bookID)
       .then(res => this.loadBooks())
       .catch(err => console.log(err));
   };
@@ -68,7 +68,7 @@ class Books extends Component {
 
   saveBook = book => {
     API.saveBook({
-      id: book.id,
+      bookID: book.id,
       title: book.volumeInfo.title,
       authors: book.volumeInfo.authors,
       description: book.volumeInfo.description,
@@ -115,7 +115,7 @@ class Books extends Component {
                   Object.keys(this.state.searchedBooks)[0]
                 ].map(book => (
                   <Card
-                    key={book.id}
+                    bookID={book.id}
                     image={book.volumeInfo.imageLinks.smallThumbnail}
                     title={book.volumeInfo.title}
                     authors={book.volumeInfo.authors}
@@ -135,13 +135,13 @@ class Books extends Component {
             </Jumbotron>
             <List>
               {this.state.savedBooks.map(book => (
-                <ListItem key={book.id}>
-                  <Link to={"/savedBooks/" + book.id}>
+                <ListItem key={book.bookID}>
+                  <Link to={book.link}>
                     <strong>
                       {book.title} by {book.authors}
                     </strong>
                   </Link>
-                  <DeleteBtn onClick={() => this.deleteBook(book.id)} />
+                  <DeleteBtn onClick={() => this.deleteBook(book.bookID)} />
                 </ListItem>
               ))}
             </List>
